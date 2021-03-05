@@ -1,30 +1,29 @@
 #include "myheader.h"
 
+const bool debug = true;
+
 using std::cout;
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char* argv[]) {
   char cmd[FILENAME_MAX] = "mkdir ";
   char cCurrentPath[FILENAME_MAX];
-  char projectPath[FILENAME_MAX] = "" ;
+  char projectPath[FILENAME_MAX] = "";
   char buildPath[FILENAME_MAX] = "";
   char linuxBuildPath[FILENAME_MAX] = "";
   char windowsBuildPath[FILENAME_MAX] = "";
   char srcPath[FILENAME_MAX] = "";
   char includePath[FILENAME_MAX] = "";
 
-  if(argc != 2)
-  {
+  if (argc != 2) {
     printf("Invalid number of arguments provided!");
     return 1;
   }
 
-  if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
-  {
+  if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath))) {
     return errno;
   }
 
-  cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';  
+  cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
 
   strcat(projectPath, cCurrentPath);
   strcat(projectPath, "/");
@@ -34,17 +33,17 @@ int main(int argc, char * argv[])
   system(cmd);
 
   strcat(buildPath, projectPath);
-  strcat(buildPath, "/build"); 
+  strcat(buildPath, "/build");
 
   strncpy(cmd, "mkdir ", sizeof(cmd));
 
   strcat(cmd, buildPath);
 
   system(cmd);
- 
+
   strcat(linuxBuildPath, buildPath);
   strcat(linuxBuildPath, "/linux");
-  
+
   strncpy(cmd, "mkdir ", sizeof(cmd));
 
   strcat(cmd, linuxBuildPath);
@@ -59,7 +58,7 @@ int main(int argc, char * argv[])
   strcat(cmd, windowsBuildPath);
 
   system(cmd);
-  
+
   strcat(srcPath, projectPath);
   strcat(srcPath, "/src");
 
@@ -74,13 +73,14 @@ int main(int argc, char * argv[])
   strcat(cmd, includePath);
 
   system(cmd);
-  
-  
+
+  if (debug) {
 #ifdef WINDOWS
-  system("rmdir /s main");
+    system("rmdir /s main");
 #else
-  system("rm -r -v main");
+    system("rm -r -v main");
 #endif
+  }
 
   return 0;
 }
