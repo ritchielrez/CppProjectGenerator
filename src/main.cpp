@@ -5,14 +5,14 @@ const bool debug = true;
 using std::cout;
 
 int main(int argc, char *argv[]) {
-  char cmd[FILENAME_MAX] = "mkdir ";
-  char cCurrentPath[FILENAME_MAX];
-  char projectPath[FILENAME_MAX] = "";
-  char buildPath[FILENAME_MAX] = "";
-  char linuxBuildPath[FILENAME_MAX] = "";
-  char windowsBuildPath[FILENAME_MAX] = "";
-  char srcPath[FILENAME_MAX] = "";
-  char includePath[FILENAME_MAX] = "";
+  char cmd[256] = "mkdir ";
+  char cCurrentPath[256];
+  char projectPath[256] = "";
+  char buildPath[256] = "";
+  char linuxBuildPath[256] = "";
+  char windowsBuildPath[256] = "";
+  char srcPath[256] = "";
+  char includePath[256] = "";
 
   if (argc != 2) {
     printf("Invalid number of arguments provided!");
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
   system(cmd);
 
   FILE *srcFile;
-  char srcFileName[FILENAME_MAX];
+  char srcFileName[256] = "";
 
   strcat(srcFileName, srcPath);
   strcat(srcFileName, "/main.cpp");
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
 #else
     system("rm -r -v main");
 #endif
-  }
 
-  return 0;
+    return 0;
+  }
 }
