@@ -4,103 +4,98 @@ const bool debug = true;
 
 using std::cout;
 
-int main(int argc, char *argv[])
-{
-    char cmd[FILENAME_MAX] = "mkdir ";
-    char cCurrentPath[FILENAME_MAX];
-    char projectPath[FILENAME_MAX] = "";
-    char buildPath[FILENAME_MAX] = "";
-    char linuxBuildPath[FILENAME_MAX] = "";
-    char windowsBuildPath[FILENAME_MAX] = "";
-    char srcPath[FILENAME_MAX] = "";
-    char includePath[FILENAME_MAX] = "";
+int main(int argc, char *argv[]) {
+  char cmd[FILENAME_MAX] = "mkdir ";
+  char cCurrentPath[FILENAME_MAX];
+  char projectPath[FILENAME_MAX] = "";
+  char buildPath[FILENAME_MAX] = "";
+  char linuxBuildPath[FILENAME_MAX] = "";
+  char windowsBuildPath[FILENAME_MAX] = "";
+  char srcPath[FILENAME_MAX] = "";
+  char includePath[FILENAME_MAX] = "";
 
-    if (argc != 2)
-    {
-        printf("Invalid number of arguments provided!");
-        return 1;
-    }
+  if (argc != 2) {
+    printf("Invalid number of arguments provided!");
+    return 1;
+  }
 
-    if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
-    {
-        return errno;
-    }
+  if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath))) {
+    return errno;
+  }
 
-    cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+  cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
 
-    strcat(projectPath, cCurrentPath);
-    strcat(projectPath, "/");
-    strcat(projectPath, argv[1]);
-    strcat(cmd, projectPath);
+  strcat(projectPath, cCurrentPath);
+  strcat(projectPath, "/");
+  strcat(projectPath, argv[1]);
+  strcat(cmd, projectPath);
 
-    system(cmd);
+  system(cmd);
 
-    strcat(buildPath, projectPath);
-    strcat(buildPath, "/build");
+  strcat(buildPath, projectPath);
+  strcat(buildPath, "/build");
 
-    strncpy(cmd, "mkdir ", sizeof(cmd));
+  strncpy(cmd, "mkdir ", sizeof(cmd));
 
-    strcat(cmd, buildPath);
+  strcat(cmd, buildPath);
 
-    system(cmd);
+  system(cmd);
 
-    strcat(linuxBuildPath, buildPath);
-    strcat(linuxBuildPath, "/linux");
+  strcat(linuxBuildPath, buildPath);
+  strcat(linuxBuildPath, "/linux");
 
-    strncpy(cmd, "mkdir ", sizeof(cmd));
+  strncpy(cmd, "mkdir ", sizeof(cmd));
 
-    strcat(cmd, linuxBuildPath);
+  strcat(cmd, linuxBuildPath);
 
-    system(cmd);
+  system(cmd);
 
-    strcat(windowsBuildPath, buildPath);
-    strcat(windowsBuildPath, "/windows");
+  strcat(windowsBuildPath, buildPath);
+  strcat(windowsBuildPath, "/windows");
 
-    strncpy(cmd, "mkdir ", sizeof(cmd));
+  strncpy(cmd, "mkdir ", sizeof(cmd));
 
-    strcat(cmd, windowsBuildPath);
+  strcat(cmd, windowsBuildPath);
 
-    system(cmd);
+  system(cmd);
 
-    strcat(srcPath, projectPath);
-    strcat(srcPath, "/src");
+  strcat(srcPath, projectPath);
+  strcat(srcPath, "/src");
 
-    strncpy(cmd, "mkdir ", sizeof(cmd));
+  strncpy(cmd, "mkdir ", sizeof(cmd));
 
-    strcat(cmd, srcPath);
+  strcat(cmd, srcPath);
 
-    strcat(includePath, projectPath);
-    strcat(includePath, "/include");
+  strcat(includePath, projectPath);
+  strcat(includePath, "/include");
 
-    strcat(cmd, " ");
-    strcat(cmd, includePath);
+  strcat(cmd, " ");
+  strcat(cmd, includePath);
 
-    system(cmd);
+  system(cmd);
 
-    FILE *srcFile;
-    char srcFileName[FILENAME_MAX];
+  FILE *srcFile;
+  char srcFileName[FILENAME_MAX];
 
-    strcat(srcFileName, srcPath);
-    strcat(srcFileName, "/main.cpp");
+  strcat(srcFileName, srcPath);
+  strcat(srcFileName, "/main.cpp");
 
-    if (debug)
-    {
-        cout << srcPath;
-        cout << cCurrentPath;
-    }
+  if (debug) {
+    cout << srcPath;
+    cout << cCurrentPath;
+  }
 
-    srcFile = fopen(srcFileName, "w");
+  srcFile = fopen(srcFileName, "w");
 
-    fclose(srcFile);
+  fclose(srcFile);
 
-    if (debug)
-    {
+  if (debug) {
 #ifdef WINDOWS
-        system("rmdir /s main");
+    system("rmdir /s main");
 #else
-        system("rm -r -v main");
+    system("rm -r -v main");
 #endif
-    }
+  }
 
-    return 0;
+  return 0;
 }
