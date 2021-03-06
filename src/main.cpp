@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 
   if (debug) {
     cout << srcPath;
-    cout << cCurrentPath;
+    cout << srcFileName;
   }
 
   srcFile = fopen(srcFileName, "w");
