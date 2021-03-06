@@ -1,3 +1,3 @@
 # !/bin/sh
 
-g++ ./src/main.cpp -o ./build/projectGenerate -I./include/
+sudo g++ ./src/main.cpp -o /usr/local/bin/projectGenerate -I./include/

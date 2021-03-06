@@ -74,21 +74,6 @@ int main(int argc, char* argv[]) {
 
   system(cmd);
 
-  FILE* srcFile;
-  char srcFileName[FILENAME_MAX];
-
-  strcat(srcFileName, srcPath);
-  strcat(srcFileName, "/main.cpp");
-
-  if (debug) {
-    cout << srcPath;
-    cout << cCurrentPath;
-  }
-
-  srcFile = fopen(srcFileName, "w");
-
-  fclose(srcFile);
-
   if (debug) {
 #ifdef WINDOWS
     system("rmdir /s main");

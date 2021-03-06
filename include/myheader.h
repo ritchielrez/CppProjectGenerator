@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <string.h>
 #include <cstdio>
 
 #ifdef WINDOWS
