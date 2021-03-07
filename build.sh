@@ -1,2 +1,2 @@
 # !/bin/sh
-g++ ./src/main.cpp -o ./build/projectGenerate -I./include/
+g++ -g ./src/main.cpp -o ./build/projectGenerate -I./include/
