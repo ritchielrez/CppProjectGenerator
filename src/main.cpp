@@ -75,8 +75,11 @@ int main(int argc, char *argv[]) {
   system(cmd);
 
   FILE *srcFile;
-  char srcFileName[256] = "";
+  char * srcFileName;
 
+  srcFileName = (char *)malloc(sizeof(char) * 256);
+
+  strcat(srcFileName, "");
   strcat(srcFileName, srcPath);
   strcat(srcFileName, "/main.cpp");
 
