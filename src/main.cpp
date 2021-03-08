@@ -91,6 +91,7 @@ int main(int argc, char *argv[]) {
   fprintf(srcFile, "}\n");
 
   fclose(srcFile);
+  free(srcFileName);
 
   if (debug) {
 #ifdef WINDOWS
