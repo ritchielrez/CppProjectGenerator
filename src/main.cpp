@@ -1,18 +1,20 @@
 #include "myheader.h"
 
+#define STRING_SIZE_NAME_MAX 256
+
 const bool debug = false;
 
 using std::cout;
 
 int main(int argc, char *argv[]) {
-  char cmd[256] = "mkdir ";
-  char cCurrentPath[256];
-  char projectPath[256] = "";
-  char buildPath[256] = "";
-  char linuxBuildPath[256] = "";
-  char windowsBuildPath[256] = "";
-  char srcPath[256] = "";
-  char includePath[256] = "";
+  char cmd[STRING_SIZE_NAME_MAX] = "mkdir ";
+  char cCurrentPath[STRING_SIZE_NAME_MAX];
+  char projectPath[STRING_SIZE_NAME_MAX] = "";
+  char buildPath[STRING_SIZE_NAME_MAX] = "";
+  char linuxBuildPath[STRING_SIZE_NAME_MAX] = "";
+  char windowsBuildPath[STRING_SIZE_NAME_MAX] = "";
+  char srcPath[STRING_SIZE_NAME_MAX] = "";
+  char includePath[STRING_SIZE_NAME_MAX] = "";
 
   if (argc != 2) {
     printf("Invalid number of arguments provided!");
@@ -75,9 +77,9 @@ int main(int argc, char *argv[]) {
   system(cmd);
 
   FILE *srcFile;
-  char * srcFileName;
+  char *srcFileName;
 
-  srcFileName = (char *)malloc(sizeof(char) * 256);
+  srcFileName = (char *)malloc(sizeof(char) * STRING_SIZE_NAME_MAX);
 
   strcat(srcFileName, "");
   strcat(srcFileName, srcPath);
@@ -92,6 +94,33 @@ int main(int argc, char *argv[]) {
 
   fclose(srcFile);
   free(srcFileName);
+
+  FILE *includeFile;
+  char *includeFileName;
+
+  includeFileName = (char *)malloc(sizeof(char) * STRING_SIZE_NAME_MAX);
+
+  strcat(includeFileName, "");
+  strcat(includeFileName, includePath);
+  strcat(includeFileName, "/myheader.h");
+
+  includeFile = fopen(includeFileName, "w");
+
+  fprintf(includeFile, "#include <iostream>\n");
+  fprintf(includeFile, "#include <vector>\n");
+  fprintf(includeFile, "#include <cmath>\n");
+  fprintf(includeFile, "#include <map>\n");
+  fprintf(includeFile, "#include <cstring>\n");
+  fprintf(includeFile, "#include <cstdio>\n\n");
+  fprintf(includeFile, "#ifdef WINDOWS\n");
+  fprintf(includeFile, "\t#include <dirent.h>\n");
+  fprintf(includeFile, "\t#include <windows.h>\n");
+  fprintf(includeFile, "#else\n");
+  fprintf(includeFile, "\t#include <unistd.h>\n");
+  fprintf(includeFile, "\t#include <signal.h>\n");
+  fprintf(includeFile, "#endif");
+
+  fclose(includeFile);
 
   if (debug) {
 #ifdef WINDOWS
