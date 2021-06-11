@@ -4,8 +4,6 @@
 
 const bool debug = false;
 
-using std::cout;
-
 int main(int argc, char *argv[]) {
   char cmd[STRING_SIZE_NAME_MAX] = "mkdir ";
   char cCurrentPath[STRING_SIZE_NAME_MAX];
@@ -120,7 +118,6 @@ int main(int argc, char *argv[]) {
   fprintf(includeFile, "\t#include <signal.h>\n");
   fprintf(includeFile, "#endif");
 
-  
 
   fclose(includeFile);
 
