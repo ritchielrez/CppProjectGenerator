@@ -120,6 +120,8 @@ int main(int argc, char *argv[]) {
   fprintf(includeFile, "\t#include <signal.h>\n");
   fprintf(includeFile, "#endif");
 
+  
+
   fclose(includeFile);
 
   if (debug) {

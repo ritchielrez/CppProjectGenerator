@@ -5,3 +5,4 @@
 .lvimrc
 build/**
 main/**
+compile_flags.txt
