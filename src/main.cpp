@@ -1,4 +1,6 @@
 #include "myheader.h"
+#include <cstdio>
+#include <cstdlib>
 
 #define STRING_SIZE_NAME_MAX 256
 
@@ -121,7 +123,25 @@ int main(int argc, char *argv[])
     fprintf(includeFile, "\t#include <signal.h>\n");
     fprintf(includeFile, "#endif");
 
+    free(includeFileName);
     fclose(includeFile);
+
+    FILE *buildSh;
+    char *buildShName;
+
+    buildShName = (char *)malloc(sizeof(char) * STRING_SIZE_NAME_MAX);
+
+    strcat(buildShName, "");
+    strcat(buildShName, projectPath);
+    strcat(buildShName, "/build.sh");
+
+    buildSh = fopen(buildShName, "w");
+
+    fprintf(buildSh, "#!/bin/sh\n");
+    fprintf(buildSh, "g++ -g ./src/main.cpp -o ./build/linux/main -I./include/\n");
+
+    free(buildShName);
+    fclose(buildSh);
 
     if (debug)
     {
